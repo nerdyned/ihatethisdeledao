@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>‎ </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+<meta name="generator" content="Construct 3">
+
+	<link rel="manifest" href="appmanifest.json">
+
+
+<link rel="stylesheet" href="style.css">
+<script>
+
+</script>
+<script>
+window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
+</script>
+
+</head>
+<body>
+<div id="fb-root"></div>
+	<script src="box2d.wasm.js"></script>
+	<noscript>
+		<div id="notSupportedWrap">
+			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
+			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
+			<p class="notSupportedMessage">This game was developed with Construct. <a href="https://www.construct.net/en">Build your own games</a></p>
+		</div>
+	</noscript>
+	<script src="scripts/supportcheck.js"></script>
+	<script src="scripts/offlineclient.js"></script>
+	<script src="scripts/main.f.js"></script>
+	<script src="scripts/register-sw.js"></script>
+	<script src="js/analytics_ubg_v1_4.js"></script>
+
+<a href="/math.html" style="
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.9);
+  color: #ffffff;
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+  z-index: 9999;
+">
+  ⬅ Back to Home
+</a>
+
+
+
+<!-- Rain Layer -->
+<div class="rain-layer" id="rain"></div>
+
+<style>
+  /* Rain container */
+  .rain-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* above content, below Back button */
+    pointer-events: none; /* lets clicks pass through */
+  }
+
+  .raindrop {
+    position: absolute;
+    top: -120px;
+    width: 80px; /* adjust size */
+    height: auto;
+    opacity: 0.3; /* 👈 makes raindrops transparent */
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+    }
+  }
+</style>
+
+<script>
+  // Rain effect
+  const numDrops = 25; // adjust number of falling images
+  const rainLayer = document.getElementById("rain");
+
+  for (let i = 0; i < numDrops; i++) {
+    const drop = document.createElement("img");
+    drop.src = "/images/face.png"; // 👈 replace with your image filename
+    drop.className = "raindrop";
+
+    // random horizontal position
+    drop.style.left = Math.random() * 100 + "vw";
+    // random speed
+    drop.style.animationDuration = (3 + Math.random() * 5) + "s";
+    // random start delay
+    drop.style.animationDelay = Math.random() * 5 + "s";
+
+    rainLayer.appendChild(drop);
+  }
+</script>
+
+</body>
+</html>

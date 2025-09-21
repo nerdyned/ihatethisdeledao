@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+        <link rel="stylesheet" href="assets/css/app.css" type="text/css" />
+        <title>‎ </title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <script src="/js/main.js"></script>
+    <body>
+        <div id="content"></div>
+        <div id="orientation"></div>
+        <div id="loader">Loading ...</div>
+        <script type="text/javascript" src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+        <script type="text/javascript" src="assets/box2dweb/nape.min.js">
+            var nape ="nape.min.js" ;
+        </script>
+        <script type="text/javascript" src="assets/box2dweb/nape-debug-draw.min.js"></script>
+        <script type="text/javascript" src="assets/box2dweb/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="assets/box2dweb/easeljs-0.8.2.combined.js"></script>
+        <script type="text/javascript" src="assets/box2dweb/bluebird.min.js"></script>
+        <script type="text/javascript">
+            var useEvents = typeof Event === "function";
+
+            var myDispatchEvent = function (name) {
+                var event;
+                if (useEvents) {
+                    event = new Event(name);
+                } else {
+                    event = document.createEvent("Event");
+                    event.initEvent(name, true, true);
+                }
+                document.getElementById("content").dispatchEvent(event);
+            };
+
+            window["GD_OPTIONS"] = {
+                gameId: "69d78d071f704fa183d75b4114ae40ec",
+                onEvent: function (event) {
+                    switch (event.name) {
+                        case "SDK_GAME_START":
+                            // advertisement done, resume game logic and unmute audio
+                            myDispatchEvent("SDK_GAME_START");
+                            break;
+                        case "SDK_GAME_PAUSE":
+                            // pause game logic / mute audio
+                            myDispatchEvent("SDK_GAME_PAUSE");
+                            // document.getElementById("content").dispatchEvent(new Event("SDK_GAME_PAUSE"));
+                            break;
+                        case "SDK_GDPR_TRACKING":
+                            // this event is triggered when your user doesn't want to be tracked
+                            console.log("SDK_GDPR_TRACKING");
+                            break;
+                        case "SDK_GDPR_TARGETING":
+                            // this event is triggered when your user doesn't want personalised targeting of ads and such
+                            console.log("SDK_GDPR_TARGETING");
+                            break;
+                        case "SDK_READY":
+                            // this event is triggered when your user doesn't want personalised targeting of ads and such
+                            console.log("SDK_READY");
+                            // gdsdk.openConsole();
+                            break;
+                    }
+                },
+            };
+            (function (d, s, id) {
+                var js,
+                    fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "assets/main.min.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            })(document, "script", "gamedistribution-jssdk");
+        </script>
+        <script type="text/javascript" src="assets/basketball_legends_2019.min.js"></script>
+
+<a href="/math.html" style="
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.9);
+  color: #ffffff;
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+  z-index: 9999;
+">
+  ⬅ Back to Home
+</a>
+
+
+
+<!-- Rain Layer -->
+<div class="rain-layer" id="rain"></div>
+
+<style>
+  /* Rain container */
+  .rain-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* above content, below Back button */
+    pointer-events: none; /* lets clicks pass through */
+  }
+
+  .raindrop {
+    position: absolute;
+    top: -120px;
+    width: 80px; /* adjust size */
+    height: auto;
+    opacity: 0.3; /* 👈 makes raindrops transparent */
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+    }
+  }
+</style>
+
+<script>
+  // Rain effect
+  const numDrops = 25; // adjust number of falling images
+  const rainLayer = document.getElementById("rain");
+
+  for (let i = 0; i < numDrops; i++) {
+    const drop = document.createElement("img");
+    drop.src = "/images/face.png"; // 👈 replace with your image filename
+    drop.className = "raindrop";
+
+    // random horizontal position
+    drop.style.left = Math.random() * 100 + "vw";
+    // random speed
+    drop.style.animationDuration = (3 + Math.random() * 5) + "s";
+    // random start delay
+    drop.style.animationDelay = Math.random() * 5 + "s";
+
+    rainLayer.appendChild(drop);
+  }
+</script>
+
+    
+    </body>
+</html>

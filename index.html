@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>‎ </title>
+  <style>
+    html,body {
+      height: 100%;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #0f172a 0%, #0b1220 60%);
+      overflow: hidden; /* prevent scrollbars */
+    }
+
+    /* container for falling images */
+    .rain-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0; /* behind text */
+      pointer-events: none; /* clicks go through */
+    }
+
+    .raindrop {
+      position: absolute;
+      top: -120px;
+      width: 80px; /* adjust image size */
+      height: auto;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+
+    /* text container */
+    .title-wrap {
+      position: absolute;
+      top: 25vh; /* ~75% up */
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 1; /* above images */
+      color: white;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 96px;
+      font-weight: 900;
+      line-height: 1.1;
+      white-space: nowrap;
+      text-shadow:
+        0 6px 18px rgba(2,6,23,0.65),
+        0 2px 6px rgba(2,6,23,0.5);
+      user-select: none;
+    }
+
+    .subtitle {
+      margin-top: 20px;
+      font-size: 28px;
+      font-weight: 500;
+      color: #e2e8f0;
+      text-shadow: 0 2px 6px rgba(2,6,23,0.5);
+      user-select: none;
+    }
+
+    .freedom-link {
+      display: inline-block;
+      margin-top: 40px; /* push it lower under the subtitle */
+      font-size: 24px;
+      font-weight: 600;
+      color: #38bdf8;
+      text-decoration: none;
+      text-shadow: 0 2px 6px rgba(2,6,23,0.5);
+      transition: all 0.3s ease;
+      user-select: none;
+
+      /* rounded rectangle card */
+      background: rgba(15, 23, 42, 0.8);
+      padding: 14px 28px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    }
+
+    .freedom-link:hover {
+      color: #0ea5e9;
+      background: rgba(30, 41, 59, 0.9);
+      transform: translateY(-3px); /* small lift on hover */
+    }
+  </style>
+</head>
+<body>
+  <!-- Rain images -->
+  <div class="rain-layer" id="rain"></div>
+
+  <!-- Title + subtitle -->
+  <div class="title-wrap">
+    <h1 class="title">Deledao Byp4ssr</h1>
+    <p class="subtitle" id="subtitle"></p>
+    <a href="math.html" class="freedom-link">Unleash Your Freedom</a>
+  </div>
+
+  <script>
+    // Random subtitle
+    const subtitles = [
+      "Easy Escape",
+      "Stealth mode engaged",
+      "Fast. Simple. Hidden.",
+      "Your access, your rules",
+      "Escape the filter",
+      "Freedom at your fingertips",
+      "Cloaked in plain sight",
+      "Escape the Filter, Enter the Web",
+      "Surf Without Limits",
+      "Filters? Not Today",
+      "No Filters, No Limits",
+      "Filters Fail Here",
+      ".gg/HPyH5jV8qE",
+      ".gg/HPyH5jV8qE",
+      ".gg/HPyH5jV8qE"
+    ];
+    document.getElementById("subtitle").textContent =
+      subtitles[Math.floor(Math.random() * subtitles.length)];
+
+    // Rain effect
+    const numDrops = 20; // adjust number of falling images
+    const rainLayer = document.getElementById("rain");
+
+    for (let i = 0; i < numDrops; i++) {
+      const drop = document.createElement("img");
+      drop.src = "images/face.png"; // 👈 replace with your image filename
+      drop.className = "raindrop";
+
+      // random horizontal pos
+      drop.style.left = Math.random() * 100 + "vw";
+      // random speed
+      drop.style.animationDuration = (3 + Math.random() * 5) + "s";
+      // random start delay
+      drop.style.animationDelay = Math.random() * 5 + "s";
+
+      rainLayer.appendChild(drop);
+    }
+  </script>
+</body>
+</html>
