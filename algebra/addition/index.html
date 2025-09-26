@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<script>
+    if (window.parent !== window.self) window.parent.postMessage("bonk", "*");
+    window.addEventListener("DOMContentLoaded", function () {
+        document.body.style.margin = "0";
+        document.body.style.height = "100vh";
+        document.body.style.overflow = "hidden";
+    });
+</script>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>‎ </title>
+        <link href="shared/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="TemplateData56/style.css" />
+        <script src="TemplateData56/UnityProgress.js"></script>
+        <link rel="shortcut icon" href="TemplateData/favicon.ico" />
+        <link rel="icon" href="">
+        <script src="Build/UnityLoader.js"></script>
+        <script>
+            window.rWS = WebSocket;
+            WebSocket = function (url, options) {
+                var split = url.split("://");
+                var prefix = "";
+                if (!url.includes("arc.io")) {
+                    switch (split[0].toLowerCase()) {
+                        case "ws":
+                            prefix = "wss://onebigorange-tmm.tbt.mx/websocket/http://";
+                            break;
+                        case "wss":
+                            prefix = "wss://onebigorange-tmm.tbt.mx/websocket/https://";
+                            break;
+                        default:
+                            prefix = split[0];
+                    }
+                    return new (Function.prototype.bind.call(
+                        window.rWS,
+                        null,
+                        (split[1].match(/\//g) || []).length === 0 ? (split[1].includes("?") ? prefix + split[1].replace("?", "/?") : prefix + split[1] + "/") : prefix + split[1],
+                        options
+                    ))();
+                } else {
+                    return new window.rWS(url, options);
+                }
+            };
+            var origOpen = XMLHttpRequest.prototype.open;
+            XMLHttpRequest.prototype.open = function (...args) {
+                if (!args[1].includes("arc.io")) args[1] = /^http/.test(args[1]) ? "https://onebigstatic-tmm.tbt.mx/static/" + args[1] : args[1];
+                origOpen.apply(this, args);
+            };
+            var gameInstance = UnityLoader.instantiate("gameContainer", "Build/slope_27Sept.json", {
+                onProgress: UnityProgress,
+                Module: {
+                    onRuntimeInitialized: function () {
+                        UnityProgress(gameInstance, "complete");
+                    },
+                },
+            });
+        </script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98DP5VKS42"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-98DP5VKS42");
+        </script>
+        <script src="shared/lib.js" type="text/javascript"></script>
+        <script src="shared/gamebreak/gamebreak.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="webgl-content">
+            <div id="gameContainer" style="width: 100vw; height: 100vh;"></div>
+        </div>
+        <script type="application/javascript" src="/js/main.js"></script>
+
+<!-- Rain Layer -->
+<div class="rain-layer" id="rain"></div>
+
+<style>
+  /* Rain container */
+  .rain-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* above content, below Back button */
+    pointer-events: none; /* lets clicks pass through */
+  }
+
+  .raindrop {
+    position: absolute;
+    width: 180px; /* large drops */
+    height: auto;
+    opacity: 0.3; /* transparency */
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+    }
+  }
+</style>
+
+<script>
+  // Rain effect
+  const numDrops = 20; 
+  const rainLayer = document.getElementById("rain");
+
+  for (let i = 0; i < numDrops; i++) {
+    const drop = document.createElement("img");
+    drop.src = "/images/face.png"; // 👈 replace with your image filename
+    drop.className = "raindrop";
+
+    // random horizontal position
+    drop.style.left = Math.random() * 100 + "vw";
+
+    // random speed (fast falling)
+    drop.style.animationDuration = (1 + Math.random() * 2) + "s";
+
+    // random start delay
+    drop.style.animationDelay = Math.random() * 2 + "s";
+
+    // 👇 First load: random vertical starting position
+    const startY = Math.random() * 100; // anywhere from top to bottom
+    drop.style.top = startY + "vh";
+
+    // After animation restarts, force them to always start from top
+    drop.addEventListener("animationiteration", () => {
+      drop.style.top = "-200px"; // reset to just above screen
+    });
+
+    rainLayer.appendChild(drop);
+  }
+</script>
+
+
+<a href="/math.html" style="
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.9);
+  color: #ffffff;
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+  z-index: 9999;
+">
+  ⬅ Back to Home
+</a>
+
+    </body>
+</html>
