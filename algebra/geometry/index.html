@@ -97,57 +97,26 @@
 
 
 
-<!-- Rain Layer -->
-<div class="rain-layer" id="rain"></div>
+<!-- Transparent Fullscreen Image Overlay -->
+<div class="overlay-image"></div>
 
 <style>
-  /* Rain container */
-  .rain-layer {
+  .overlay-image {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999; /* above content, below Back button */
-    pointer-events: none; /* lets clicks pass through */
-  }
-
-  .raindrop {
-    position: absolute;
-    top: -120px;
-    width: 80px; /* adjust size */
-    height: auto;
-    opacity: 0.3; /* 👈 makes raindrops transparent */
-    animation: fall linear infinite;
-  }
-
-  @keyframes fall {
-    to {
-      transform: translateY(110vh);
-    }
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/images/face.png'); /* 👈 change this */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%; /* 👈 stretches image to fit any ratio */
+    opacity: 0.5; /* 30% transparent */
+    z-index: 9998; /* 👈 above all content but below the back button (9999) */
+    pointer-events: none; /* not clickable or interactive */
   }
 </style>
 
-<script>
-  // Rain effect
-  const numDrops = 25; // adjust number of falling images
-  const rainLayer = document.getElementById("rain");
-
-  for (let i = 0; i < numDrops; i++) {
-    const drop = document.createElement("img");
-    drop.src = "/images/face.png"; // 👈 replace with your image filename
-    drop.className = "raindrop";
-
-    // random horizontal position
-    drop.style.left = Math.random() * 100 + "vw";
-    // random speed
-    drop.style.animationDuration = (3 + Math.random() * 5) + "s";
-    // random start delay
-    drop.style.animationDelay = Math.random() * 5 + "s";
-
-    rainLayer.appendChild(drop);
-  }
-</script>
 
     
     </body>
